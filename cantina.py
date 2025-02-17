@@ -1,46 +1,75 @@
-def escolhaCantina(cantina):
-    match cantina:
-        case 1:
-            print("Você escolheu a Cantina UMP")
-        case 2:
-            print("Você escolheu a Cantina UPH")
-        case 3:
-            print("Você escolheu a Cantina UPA")
-        case 4:
-            print("Você escolheu a Cantina SAF")
-        case _:
-            print("Opção inválida. Escolha entre 1 e 4.")
-            return False
+import os
 
-    print("\nEscolha uma opção:")
-    print("1 - Fazer pedido")
-    print("2 - Cardápio do dia")
-    print("3 - Voltar")
-    print("4 - Sair")
-    return True
+def limparTela():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
-def escolhaOpcao(opcao):
+def menuCantinas():
+    print("\nSeja Bem-Vindo!")
+    print("1 - UMP - União de Mocidade Presbiteriana")
+    print("2 - UPH - União Presbiteriana de Homens")
+    print("3 - UPA - União Presbiteriana de Adolescentes")
+    print("4 - SAF - Sociedade Auxiliadora Feminina")
+    print("5 - Finalizar acesso\n")
     
-    match opcao:
-        case 1:
-            print("\nFazer pedido")
-        case 2:
-            print("\nCardápio do dia")
-        case 3:
-            print("\nVoltando ao menu...")
-        case 4:
-            print("\nSaindo... Até logo!")
-        case _:
-            print("\n Opção inválida. Escolha entre 1 e 4.")
+    escolhaCantina()
 
-print("Seja Bem-Vindo! \n")
-print("1 - UMP - União de Mocidade Presbiteriana")
-print("2 - UPH - União Presbiteriana de Homens")
-print("3 - UPA - União Presbiteriana de Adolescentes")
-print("4 - SAF - Sociedade Auxiliadora Feminina\n")
+def menuOpcoes():  
+    print("\n1 - Fazer pedido")
+    print("2 - Visualizar pedido")
+    print("3 - Cardápio do dia")
+    print("4 - Voltar para as cantinas")
+    print("5 - Finalizar acesso")
 
-cantina = int(input("Escolha uma cantina: "))
+def escolhaCantina():
+    while True:
+        cantina = int(input("\nEscolha uma cantina: "))
+        
+        match cantina:
+            case 1:
+                limparTela()
+                print("\nSeja Bem-Vindo à Cantina UMP")
+            case 2:
+                limparTela()
+                print("\nSeja Bem-Vindo à Cantina UPH")
+            case 3:
+                limparTela()
+                print("\nSeja Bem-Vindo à Cantina UPA")
+            case 4:
+                limparTela()
+                print("\nSeja Bem-Vindo à Cantina SAF")
+            case 5:
+                print("\nSaindo...")
+                break
+            case _:
+                print("\nOpção inválida. Escolha entre 1 e 5.")
+                continue
+        escolhaOpcao()
 
-if escolhaCantina(cantina):
-    opcao = int(input("\nEscolha uma opção: "))
-    escolhaOpcao(opcao)
+def escolhaOpcao():
+    while True:
+        menuOpcoes()
+        opcao = int(input("\nEscolha uma opção: "))
+
+        match opcao:
+            case 1:
+                limparTela()
+                print("\nFazendo pedido...")
+            case 2:
+                limparTela()
+                print("\nVisualizando pedido...")
+            case 3:
+                limparTela()
+                print("\nExibindo o cardápio do dia...")
+            case 4:
+                limparTela()
+                print("\nVoltando ao menu de cantinas...")
+                menuCantinas()
+            case 5:
+                limparTela()
+                print("\nSaindo... Até logo!")
+                exit()
+            case _:
+                limparTela()
+                print("\nOpção inválida. Escolha entre 1 e 5.")
+
+menuCantinas()
