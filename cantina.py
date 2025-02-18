@@ -34,6 +34,7 @@ def cardapioDoDia():
     print("9 - Suco de Caju")
     print("10 - Suco de Maracujá")
     print("11 - Suco de Limão")
+    print("12 - Voltar ao menu anterior")
 
 def escolhaCantina():
     while True:
@@ -68,49 +69,57 @@ def escolhaOpcao():
         match opcao:
             case 1:
                 limparTela()
-                print("\nFazendo pedido...")
-                cardapioDoDia() 
-                opcaoPedido = int(input("\nEscolha um item do cardápio: "))
-                match opcaoPedido:
-                    case 1:
-                        print("\nVocê escolheu Bolo Fofo.")
-                    case 2:
-                        print("\nVocê escolheu Bolo Mole.")
-                    case 3:
-                        print("\nVocê escolheu Torta de Frango.")
-                    case 4:
-                        print("\nVocê escolheu Pratinho.")
-                    case 5:
-                        print("\nVocê escolheu Cachorro Quente.")
-                    case 6:
-                        print("\nVocê escolheu Suco de Goiaba.")
-                    case 7:
-                        print("\nVocê escolheu Suco de Acerola.")
-                    case 8:
-                        print("\nVocê escolheu Suco de Cajá.")
-                    case 9:
-                        print("\nVocê escolheu Suco de Caju.")
-                    case 10:
-                        print("\nVocê escolheu Suco de Maracujá.")
-                    case 11:
-                        print("\nVocê escolheu Suco de Limão.")
-                    case _:
-                        print("\nOpção inválida no cardápio.")
+                print("\nCardápio do dia...")
+                cardapioDoDia()
+                while True:
+                        opcaoPedido = int(input("\nEscolha um item do cardápio (ou 12 para voltar): "))
+                        match opcaoPedido:
+                            case 1:
+                                print("\nVocê escolheu Bolo Fofo.")
+                            case 2:
+                                print("\nVocê escolheu Bolo Mole.")
+                            case 3:
+                                print("\nVocê escolheu Torta de Frango.")
+                            case 4:
+                                print("\nVocê escolheu Pratinho.")
+                            case 5:
+                                print("\nVocê escolheu Cachorro Quente.")
+                            case 6:
+                                print("\nVocê escolheu Suco de Goiaba.")
+                            case 7:
+                                print("\nVocê escolheu Suco de Acerola.")
+                            case 8:
+                                print("\nVocê escolheu Suco de Cajá.")
+                            case 9:
+                                print("\nVocê escolheu Suco de Caju.")
+                            case 10:
+                                print("\nVocê escolheu Suco de Maracujá.")
+                            case 11:
+                                print("\nVocê escolheu Suco de Limão.")
+                            case 12:
+                                limparTela()
+                                break
+                            case _:
+                                print("\nOpção inválida no cardápio. Escolha um número válido.")
+
             case 2:
                 limparTela()
-                cardapioDoDia()  
+                cardapioDoDia()
+                input("\nPressione Enter para voltar ao menu anterior...")
+                limparTela()
+
             case 3:
                 limparTela()
                 print("\nVoltando ao menu de cantinas...")
-                menuCantinas()
+                return menuCantinas()
+
             case 4:
                 limparTela()
                 print("\nSaindo... Até logo!")
                 exit()
+
             case _:
                 limparTela()
                 print("\nOpção inválida. Escolha entre 1 e 4.")
 
 menuCantinas()
-
-
