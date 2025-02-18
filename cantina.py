@@ -3,6 +3,27 @@ import os
 def limparTela():
     os.system('cls' if os.name == 'nt' else 'clear')
 
+pedidos = {
+    "UMP": [],
+    "UPH": [],
+    "UPA": [],
+    "SAF": []
+}
+
+cardapio = {
+    1: "Bolo Fofo",
+    2: "Bolo Mole",
+    3: "Torta de Frango",
+    4: "Pratinho",
+    5: "Cachorro Quente",
+    6: "Suco de Goiaba",
+    7: "Suco de Acerola",
+    8: "Suco de Cajá",
+    9: "Suco de Caju",
+    10: "Suco de Maracujá",
+    11: "Suco de Limão"
+}
+
 def menuCantinas():
     print("\nSeja Bem-Vindo!")
     print("1 - UMP - União de Mocidade Presbiteriana")
@@ -16,27 +37,19 @@ def menuCantinas():
 def menuOpcoes():  
     print("\n1 - Fazer pedido")
     print("2 - Cardápio do dia")
-    print("3 - Voltar para as cantinas")
-    print("4 - Finalizar acesso")
+    print("3 - Ver pedidos")
+    print("4 - Voltar para as cantinas")
+    print("5 - Finalizar acesso")
 
 def cardapioDoDia():
-    print("\nComidas:")
-    print("1 - Bolo Fofo")
-    print("2 - Bolo Mole")
-    print("3 - Torta de Frango")
-    print("4 - Pratinho")
-    print("5 - Cachorro Quente")
-
-    print("\nBebidas:")
-    print("6 - Suco de Goiaba")
-    print("7 - Suco de Acerola")
-    print("8 - Suco de Cajá")
-    print("9 - Suco de Caju")
-    print("10 - Suco de Maracujá")
-    print("11 - Suco de Limão")
+    print("\nCardápio do dia:")
+    
+    for numero, nome in cardapio.items():
+        print(f"{numero} - {nome}")
     print("12 - Voltar ao menu anterior")
 
 def escolhaCantina():
+
     while True:
         cantina = int(input("\nEscolha uma cantina: "))
         
@@ -44,82 +57,81 @@ def escolhaCantina():
             case 1:
                 limparTela()
                 print("\nSeja Bem-Vindo à Cantina UMP")
+                escolhaOpcao("UMP")
             case 2:
                 limparTela()
                 print("\nSeja Bem-Vindo à Cantina UPH")
+                escolhaOpcao("UPH")
             case 3:
                 limparTela()
                 print("\nSeja Bem-Vindo à Cantina UPA")
+                escolhaOpcao("UPA")
             case 4:
                 limparTela()
                 print("\nSeja Bem-Vindo à Cantina SAF")
+                escolhaOpcao("SAF")
             case 5:
                 print("\nSaindo...")
                 break
             case _:
                 print("\nOpção inválida. Escolha entre 1 e 5.")
-                continue
-        escolhaOpcao()
 
-def escolhaOpcao():
+def escolhaOpcao(cantinaSelecionada):
+
     while True:
         menuOpcoes()
         opcao = int(input("\nEscolha uma opção: "))
 
         match opcao:
+
             case 1:
                 limparTela()
                 print("\nCardápio do dia...")
                 cardapioDoDia()
-                while True:
-                        opcaoPedido = int(input("\nEscolha um item do cardápio (ou 12 para voltar): "))
-                        match opcaoPedido:
-                            case 1:
-                                print("\nVocê escolheu Bolo Fofo.")
-                            case 2:
-                                print("\nVocê escolheu Bolo Mole.")
-                            case 3:
-                                print("\nVocê escolheu Torta de Frango.")
-                            case 4:
-                                print("\nVocê escolheu Pratinho.")
-                            case 5:
-                                print("\nVocê escolheu Cachorro Quente.")
-                            case 6:
-                                print("\nVocê escolheu Suco de Goiaba.")
-                            case 7:
-                                print("\nVocê escolheu Suco de Acerola.")
-                            case 8:
-                                print("\nVocê escolheu Suco de Cajá.")
-                            case 9:
-                                print("\nVocê escolheu Suco de Caju.")
-                            case 10:
-                                print("\nVocê escolheu Suco de Maracujá.")
-                            case 11:
-                                print("\nVocê escolheu Suco de Limão.")
-                            case 12:
-                                limparTela()
-                                break
-                            case _:
-                                print("\nOpção inválida no cardápio. Escolha um número válido.")
 
+                while True:
+                    opcaoPedido = int(input("\nEscolha um item do cardápio (ou 12 para voltar): "))
+                    
+                    if opcaoPedido == 12:
+                        limparTela()
+                        break
+                    
+                    if opcaoPedido in cardapio:
+                        nomeItem = cardapio[opcaoPedido]
+                        print(f"\nVocê escolheu {nomeItem}.")
+                        pedidos[cantinaSelecionada].append(nomeItem)
+                    else:
+                        print("\nOpção inválida no cardápio. Escolha um número válido.")
             case 2:
                 limparTela()
                 cardapioDoDia()
                 input("\nPressione Enter para voltar ao menu anterior...")
                 limparTela()
-
             case 3:
+                limparTela()
+                verPedidos(cantinaSelecionada)
+                input("\nPressione Enter para voltar ao menu anterior...")
+                limparTela()
+            case 4:
                 limparTela()
                 print("\nVoltando ao menu de cantinas...")
                 return menuCantinas()
-
-            case 4:
+            case 5:
                 limparTela()
                 print("\nSaindo... Até logo!")
                 exit()
-
             case _:
                 limparTela()
-                print("\nOpção inválida. Escolha entre 1 e 4.")
+                print("\nOpção inválida. Escolha entre 1 e 5.")
+
+def verPedidos(cantinaSelecionada):
+
+    print(f"\nPedidos da Cantina {cantinaSelecionada}:")
+
+    if not pedidos[cantinaSelecionada]:
+        print("Nenhum pedido foi feito ainda.")
+    else:
+        for i, pedido in enumerate(pedidos[cantinaSelecionada], start=1):
+            print(f"{i}. {pedido}")
 
 menuCantinas()
