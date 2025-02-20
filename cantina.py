@@ -70,7 +70,7 @@ def escolhaOpcao():
                 limparTela()
                 print("\nFazendo pedido...")
                 cardapioDoDia() 
-                opcaoPedido = int(input("\nEscolha um item do cardápio: "))
+                opcaoPedido = int(input("\nEscolha seus itens do cardápio: "))
                 match opcaoPedido:
                     case 1:
                         print("\nVocê escolheu Bolo Fofo.")
@@ -109,7 +109,7 @@ def escolhaOpcao():
                 exit()
             case _:
                 limparTela()
-                print("\nOpção inválida. Escolha entre 1 e 4.")
+                print("\nOpção inválida. Escolha entre 1 e 11.")
 
 menuCantinas()
 
