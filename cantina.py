@@ -150,7 +150,7 @@ def fazer_pedido(cantina):
     
     while True:
         try:
-            opcao_pedido = int(input("\nEscolha um item do cardápiogg: "))
+            opcao_pedido = int(input("\nEscolha um item do cardápio: "))
             if opcao_pedido == 13:
                 limpar_tela()
                 break
