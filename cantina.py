@@ -61,10 +61,10 @@ cardapios = {
             4: "Pizza de Calabresa (1 pedaço)"
         },
         "Bebidas": {
-            3: "Suco de Maracujá",
-            4: "Suco de Tangerina",
-            5: "Suco de Morango",
-            6: "Água Mineral"
+            5: "Suco de Maracujá",
+            6: "Suco de Tangerina",
+            7: "Suco de Morango",
+            8: "Água Mineral"
         }
     }
 }
@@ -150,7 +150,7 @@ def fazer_pedido(cantina):
     
     while True:
         try:
-            opcao_pedido = int(input("\nEscolha um item do cardápiog: "))
+            opcao_pedido = int(input("\nEscolha um item do cardápiogg: "))
             if opcao_pedido == 13:
                 limpar_tela()
                 break
