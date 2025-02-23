@@ -97,8 +97,10 @@ def menu_opcoes():
     print("\n1 - Fazer pedido")
     print("2 - Cardápio do dia")
     print("3 - Ver pedidos")
-    print("4 - Voltar para as cantinas")
-    print("5 - Finalizar acesso")
+    print("4 - Remover pedido(s)")
+    print("5 - Atualizar pedido")
+    print("6 - Voltar para as cantinas")
+    print("7 - Finalizar acesso")
 
 def cardapio_do_dia(cantina):
     print(f"\nCardápio do dia da Cantina {cantina}:")
@@ -135,12 +137,22 @@ def escolha_opcao(cantina_selecionada):
                     limpar_tela()
                 case 4:
                     limpar_tela()
-                    return
+                    remover_pedido(cantina_selecionada)
+                    input("\nPressione Enter para voltar...")
+                    limpar_tela()
                 case 5:
+                    limpar_tela()
+                    atualizar_pedido(cantina_selecionada)
+                    input("\nPressione Enter para voltar...")
+                    limpar_tela()
+                case 6:
+                    limpar_tela()
+                    return
+                case 7:
                     print("\nSaindo... Até logo!")
                     exit()
                 case _:
-                    print("\nOpção inválida. Escolha entre 1 e 5.")
+                    print("\nOpção inválida. Escolha entre 1 e 7.")
         except ValueError:
             print("\nEntrada inválida! Digite um número.")
 
@@ -175,5 +187,53 @@ def ver_pedidos(cantina):
         for i, pedido in enumerate(pedidos[cantina], start=1):
             print(f"{i}. {pedido}")
 
-menu_cantinas()
+def remover_pedido(cantina):
+    while True:
+        print(f"\nRemover pedidos da Cantina {cantina}:")
+        if not pedidos[cantina]:
+            print("Nenhum pedido foi feito ainda.")
+            break
+        for i, pedido in enumerate(pedidos[cantina], start=1):
+            print(f"{i}. {pedido}")
+        try:
+            indice = int(input("\nDigite o número do pedido a ser removido (0 para sair): "))
+            if indice == 0:
+                print("Saindo da remoção de pedidos.")
+                break
+            elif 1 <= indice <= len(pedidos[cantina]):
+                removido = pedidos[cantina].pop(indice - 1)
+                print(f"Pedido '{removido}' removido com sucesso.")
+            else:
+                print("Número inválido.")
+        except ValueError:
+            print("Entrada inválida! Digite um número válido.")
 
+def atualizar_pedido(cantina):
+    print(f"\nAtualizar pedido da Cantina {cantina}:")
+    if not pedidos[cantina]:
+        print("Nenhum pedido foi feito ainda.")
+        return
+    ver_pedidos(cantina)
+    try:
+        indice = int(input("\nDigite o número do pedido a ser atualizado (0 para sair): "))
+        if indice == 0:
+            print("Operação cancelada.")
+            return
+        elif 1 <= indice <= len(pedidos[cantina]):
+            print("\nEscolha o novo item:")
+            cardapio_do_dia(cantina)
+            novo_item = int(input("\nDigite o número do novo item: "))
+            if novo_item in cardapios[cantina]["Comidas"]:
+                pedidos[cantina][indice - 1] = cardapios[cantina]["Comidas"][novo_item]
+                print("Pedido atualizado com sucesso.")
+            elif novo_item in cardapios[cantina]["Bebidas"]:
+                pedidos[cantina][indice - 1] = cardapios[cantina]["Bebidas"][novo_item]
+                print("Pedido atualizado com sucesso.")
+            else:
+                print("Número inválido. Atualização cancelada.")
+        else:
+            print("Número inválido.")
+    except ValueError:
+        print("Entrada inválida! Digite um número válido.")
+
+menu_cantinas()
