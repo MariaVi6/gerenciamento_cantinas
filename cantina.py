@@ -33,10 +33,10 @@ cardapios = {
             4: "Coxinha"
         },
         "Bebidas": {
-            3: "Suco de Goiaba",
-            4: "Suco de Acerola",
-            5: "Suco de Limão",
-            6: "Água Mineral"
+            5: "Suco de Goiaba",
+            6: "Suco de Acerola",
+            7: "Suco de Limão",
+            8: "Água Mineral"
         }
     },
     "UPA": {
@@ -149,15 +149,17 @@ def escolha_opcao(cantina_selecionada):
                     limpar_tela()
                     return
                 case 7:
+                    limpar_tela()
                     print("\nSaindo... Até logo!")
                     exit()
                 case _:
+                    limpar_tela()
                     print("\nOpção inválida. Escolha entre 1 e 7.")
         except ValueError:
+            limpar_tela()
             print("\nEntrada inválida! Digite um número.")
 
 def fazer_pedido(cantina):
-    print("\nCardápio do dia:")
     cardapio_do_dia(cantina)
     
     while True:
@@ -169,14 +171,22 @@ def fazer_pedido(cantina):
             elif opcao_pedido in cardapios[cantina]["Comidas"]:
                 nome_item = cardapios[cantina]["Comidas"][opcao_pedido]
                 pedidos[cantina].append(nome_item)
+                limpar_tela()
+                cardapio_do_dia(cantina)
                 print(f"\nVocê adicionou {nome_item} ao seu pedido.")
             elif opcao_pedido in cardapios[cantina]["Bebidas"]:
                 nome_item = cardapios[cantina]["Bebidas"][opcao_pedido]
                 pedidos[cantina].append(nome_item)
+                limpar_tela()
+                cardapio_do_dia(cantina)
                 print(f"\nVocê adicionou {nome_item} ao seu pedido.")
             else:
+                limpar_tela()
+                cardapio_do_dia(cantina)
                 print("\nNúmero inválido. Escolha um item do cardápio.")
         except ValueError:
+            limpar_tela()
+            cardapio_do_dia(cantina)
             print("\nEntrada inválida! Digite um número válido.")
 
 def ver_pedidos(cantina):
@@ -198,14 +208,18 @@ def remover_pedido(cantina):
         try:
             indice = int(input("\nDigite o número do pedido a ser removido (0 para sair): "))
             if indice == 0:
+                limpar_tela()
                 print("Saindo da remoção de pedidos.")
                 break
             elif 1 <= indice <= len(pedidos[cantina]):
                 removido = pedidos[cantina].pop(indice - 1)
+                limpar_tela()
                 print(f"Pedido '{removido}' removido com sucesso.")
             else:
+                limpar_tela()
                 print("Número inválido.")
         except ValueError:
+            limpar_tela()
             print("Entrada inválida! Digite um número válido.")
 
 def atualizar_pedido(cantina):
@@ -220,14 +234,17 @@ def atualizar_pedido(cantina):
             print("Operação cancelada.")
             return
         elif 1 <= indice <= len(pedidos[cantina]):
+            limpar_tela()
             print("\nEscolha o novo item:")
             cardapio_do_dia(cantina)
             novo_item = int(input("\nDigite o número do novo item: "))
             if novo_item in cardapios[cantina]["Comidas"]:
                 pedidos[cantina][indice - 1] = cardapios[cantina]["Comidas"][novo_item]
+                limpar_tela()
                 print("Pedido atualizado com sucesso.")
             elif novo_item in cardapios[cantina]["Bebidas"]:
                 pedidos[cantina][indice - 1] = cardapios[cantina]["Bebidas"][novo_item]
+                limpar_tela()
                 print("Pedido atualizado com sucesso.")
             else:
                 print("Número inválido. Atualização cancelada.")
